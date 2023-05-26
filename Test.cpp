@@ -105,7 +105,6 @@ TEST_CASE("AscendingIterator"){
     CHECK(*it == 37);
     it++;
     CHECK(*it == 79);
-
 }
 
 TEST_CASE("SideCrossIterator"){
@@ -155,6 +154,38 @@ TEST_CASE("PrimeIterator"){
     CHECK(*it == 37);
     it++;
     CHECK(*it == 79);
+}
+
+TEST_CASE("Assignment operator"){
+    MagicalContainer container;
+    CHECK_NOTHROW(container.addElement(12));
+    CHECK_NOTHROW(container.addElement(5));
+    CHECK_NOTHROW(container.addElement(2));
+    CHECK_NOTHROW(container.addElement(79));
+    CHECK_NOTHROW(container.addElement(37));
+
+    CHECK_NOTHROW(MagicalContainer::AscendingIterator ascIter(container));
+    CHECK_NOTHROW(ascIter.begin());
+    CHECK_NOTHROW(ascIter.end());
+
+    auto it = ascIter.begin();
+    auto s_it = ascIter.begin();
+    CHECK_EQ(*it == 2);
+    CHECK_NOTHROW(it++);
+    CHECK_EQ(*it == 5);
+    CHECK_NOTHROW(++it);
+    CHECK_EQ(*it == 12);
+    CHECK_EQ(*it != 2);
+        
+    while(it != ascIter.end() && s_it != ascIter.end()){
+        CHECK_EQ(*it > *s_it);
+        it++;
+        s_it++;
+    }
+
+
+
+
 }
 
 

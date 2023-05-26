@@ -20,11 +20,11 @@ public:
     MagicalContainer();
     ~MagicalContainer();
 
-    void addElement(int num){}
+    void addElement(int num){element.push_back(num);}
 
     int size() const
     {
-        return 1;
+        return element.size();
     }
 
     void removeElement(int num){}
