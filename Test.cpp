@@ -9,93 +9,153 @@ using namespace ariel;
 
 
 TEST_CASE("initialization empty MagicalContainer"){
-    CHECK_NOTHROW(MagicalContainer<int> int_container);
-    CHECK_NOTHROW(MagicalContainer<float> float_container);
-    CHECK_NOTHROW(MagicalContainer<char> char_container);
-    CHECK_NOTHROW(MagicalContainer<double> double_container);
-    CHECK_NOTHROW(MagicalContainer<bool> bool_container);
+    CHECK_NOTHROW(MagicalContainer container);
 }
 
 TEST_CASE("add Element"){
-    MagicalContainer<int> int_container;    
-    MagicalContainer<float> float_container;
-    MagicalContainer<char> char_container;
-    MagicalContainer<double> double_container;
-    MagicalContainer<bool> bool_container;
+    MagicalContainer container;
+    CHECK_EQ(container.size() , 0);
+
+    int count = 0;
+    while(count < 12){
+        CHECK_NOTHROW(container.addElement(count));  
+        count++;
+    }
+    CHECK_EQ(container.size() , 12);
+
+    // add negetiv int number :
+    MagicalContainer two_container;
+    CHECK_EQ(container.size() , 0);
+    int count = 0;
+    while(count > -12){ 
+        CHECK_NOTHROW(two_container.addElement(count));  
+        count--;
+    }
+    CHECK_EQ(two_container.size() , 12); 
+}
+
+TEST_CASE("add Element - failed"){
+    MagicalContainer container;
+    CHECK_EQ(container.size() , 0);
+    bool t = true;
+    double num = 6.7;
+    char c = 'c';
+    CHECK_THROWS(container.addElement(t));
+    CHECK_THROWS(container.addElement(num));
+    CHECK_THROWS(container.addElement(c));
+
+    CHECK_EQ(container.size() , 0);
+}
+
+TEST_CASE("Size of container"){ 
+    MagicalContainer container;
+    MagicalContainer two_container;
+    CHECK_EQ(container.size() , 0);
+    CHECK_EQ(two_container.size() , 0);
 
     int count = 0;
     while(count < 12){
         int random = rand();
-        CHECK_NOTHROW(int_container.addElement(random));
-        CHECK_THROWS(float_container.addElement(random));
-        CHECK_THROWS(char_container.addElement(random));
-        CHECK_THROWS(double_container.addElement(random));
-        CHECK_THROWS(bool_container.addElement(random));
-        count++;
-    }
-    count = 0 ;
-    while(count < 12){
-        float random = (float)(rand()) / (float)(rand());
-        CHECK_NOTHROW(float_container.addElement(random));
-                CHECK_THROWS(int_container.addElement(random));
-        CHECK_THROWS(char_container.addElement(random));
-        CHECK_THROWS(double_container.addElement(random));
-        CHECK_THROWS(bool_container.addElement(random));
-        count++;
-    }
-        count = 0 ;
-    while(count < 12){
-        char random = 'a' + rand()%26;
-        CHECK_NOTHROW(char_container.addElement(random));
-                        CHECK_THROWS(int_container.addElement(random));
-        CHECK_THROWS(float_container.addElement(random));
-        CHECK_THROWS(double_container.addElement(random));
-        CHECK_THROWS(bool_container.addElement(random));
-        count++;
-    }
-            count = 0 ;
-    while(count < 12){
-        bool random = rand() & 1;
-        CHECK_NOTHROW(bool_container.addElement(random));
-        CHECK_THROWS(int_container.addElement(random));
-        CHECK_THROWS(float_container.addElement(random));
-        CHECK_THROWS(char_container.addElement(random));
-        CHECK_THROWS(double_container.addElement(random));
+        CHECK_NOTHROW(container.addElement(count));
         count++;
     }
 
-
-}
-
-TEST_CASE("Size of container"){
-    MagicalContainer<int> int_container;
-    MagicalContainer<float> float_container;
-    MagicalContainer<bool> bool_container;  
-    CHECK_EQ(int_container.size() , 0);
-    CHECK_EQ(float_container.size() , 0);
-        int count = 0;
-    while(count < 12){
-        int random = rand();
-        CHECK_NOTHROW(int_container.addElement(random));
-        CHECK_THROWS(float_container.addElement(random));
-        CHECK_THROWS(bool_container.addElement(random));
-        count++;
+    double num = 0.1;
+    while(count < 5.1){
+        CHECK_THROWS(container.addElement(num));
+        num++;
     }
-    CHECK_EQ(int_container.size() , 12);
-    CHECK_EQ(float_container.size() , 0);
+    CHECK_EQ(container.size() , 12);
+    CHECK_EQ(two_container.size() , 0);
 }
 
 TEST_CASE("Remove Element"){
-    MagicalContainer<int> int_container;
-    CHECK_THROWS(int_container.removeElement(9));
+    MagicalContainer container;
+    CHECK_THROWS(container.removeElement(9));
     for(int i = 0 ; i < 6 ; i++){
-        int_container.addElement(i);
+        container.addElement(i);
     }
-    CHECK_EQ(int_container.size() , 6);
-    CHECK_THROWS(int_container.removeElement(40));
-    CHECK_EQ(int_container.size() , 6);
-    CHECK_NOTHROW(int_container.removeElement(4));
-    CHECK_EQ(int_container.size() , 5);
-    CHECK_THROWS(int_container.removeElement(7.8));
+    CHECK_EQ(container.size() , 6);
+    CHECK_THROWS(container.removeElement(40));
+    CHECK_EQ(container.size() , 6);
+    CHECK_NOTHROW(container.removeElement(4));
+    CHECK_EQ(container.size() , 5);
+    CHECK_THROWS(container.removeElement(7.8));
 }
+
+TEST_CASE("AscendingIterator"){
+    MagicalContainer container;
+    CHECK_NOTHROW(container.addElement(12));
+    CHECK_NOTHROW(container.addElement(5));
+    CHECK_NOTHROW(container.addElement(2));
+    CHECK_NOTHROW(container.addElement(79));
+    CHECK_NOTHROW(container.addElement(37));
+
+    CHECK_NOTHROW(MagicalContainer::AscendingIterator ascIter(container));
+    CHECK_NOTHROW(ascIter.begin());
+    CHECK_NOTHROW(ascIter.end());
+
+    auto it = ascIter.begin();
+    CHECK(*it == 2);
+    it++;
+    CHECK(*it == 5);
+    it++;
+    CHECK(*it == 12);
+    it++;
+    CHECK(*it == 37);
+    it++;
+    CHECK(*it == 79);
+
+}
+
+TEST_CASE("SideCrossIterator"){
+    MagicalContainer container;
+    CHECK_NOTHROW(container.addElement(2));
+    CHECK_NOTHROW(container.addElement(5));
+    CHECK_NOTHROW(container.addElement(12));
+    CHECK_NOTHROW(container.addElement(37));
+    CHECK_NOTHROW(container.addElement(79));
+    
+
+    CHECK_NOTHROW(MagicalContainer::SideCrossIterator crossIter(container));
+       CHECK_NOTHROW(crossIter.begin());
+    CHECK_NOTHROW(crossIter.end());
+
+    auto it = crossIter.begin();
+    CHECK(*it == 2);
+    it++;
+    CHECK(*it == 79);
+    it++;
+    CHECK(*it == 5);
+    it++;    
+    CHECK(*it == 37);
+    it++;
+    CHECK(*it == 12);
+
+
+}
+
+TEST_CASE("PrimeIterator"){
+    MagicalContainer container;
+    CHECK_NOTHROW(container.addElement(12));
+    CHECK_NOTHROW(container.addElement(5));
+    CHECK_NOTHROW(container.addElement(2));
+    CHECK_NOTHROW(container.addElement(79));
+    CHECK_NOTHROW(container.addElement(37));
+
+    CHECK_NOTHROW( MagicalContainer::PrimeIterator primeIter(container));
+           CHECK_NOTHROW(primeIter.begin());
+    CHECK_NOTHROW(primeIter.end());
+
+    auto it = primeIter.begin();
+    CHECK(*it == 2);
+    it++;
+    CHECK(*it == 5);
+    it++;
+    CHECK(*it == 37);
+    it++;
+    CHECK(*it == 79);
+}
+
+
 
