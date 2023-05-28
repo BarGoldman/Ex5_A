@@ -5,7 +5,6 @@
 #include <random>
 
 using namespace std;
-using namespace ariel;
 
 
 TEST_CASE("initialization empty MagicalContainer"){
@@ -91,7 +90,7 @@ TEST_CASE("AscendingIterator"){
     CHECK_NOTHROW(container.addElement(79));
     CHECK_NOTHROW(container.addElement(37));
 
-    CHECK_NOTHROW(MagicalContainer::AscendingIterator ascIter(container));
+    CHECK_NOTHROW(AscendingIterator ascIter(container));
     CHECK_NOTHROW(ascIter.begin());
     CHECK_NOTHROW(ascIter.end());
 
@@ -116,7 +115,7 @@ TEST_CASE("SideCrossIterator"){
     CHECK_NOTHROW(container.addElement(79));
     
 
-    CHECK_NOTHROW(MagicalContainer::SideCrossIterator crossIter(container));
+    CHECK_NOTHROW(SideCrossIterator crossIter(container));
        CHECK_NOTHROW(crossIter.begin());
     CHECK_NOTHROW(crossIter.end());
 
