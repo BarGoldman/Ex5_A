@@ -1,4 +1,4 @@
-#include "MagicalContainer.h"
+#include "MagicalContainer.hpp"
 
 void MagicalContainer::addElement(int num) { element.push_back(num); }
 int MagicalContainer::size() const
