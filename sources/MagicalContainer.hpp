@@ -34,11 +34,10 @@ public:
     {
     private:
         MagicalContainer &_container;
-        int _size;
 
     public:
-        AscendingIterator(MagicalContainer &container) : _container(container), _size(container.size()){};      // Default constructor
-        AscendingIterator(const AscendingIterator &other) : _container(other._container), _size(other._size){}; // Copy constructor
+        AscendingIterator(MagicalContainer &container) : _container(container){};      // Default constructor
+        AscendingIterator(const AscendingIterator &other) : _container(other._container){}; // Copy constructor
 
         AscendingIterator(AscendingIterator &&) = delete;            // Deleting move constructor
         AscendingIterator &operator=(AscendingIterator &&) = delete; // Deleting move assignment operator
@@ -49,7 +48,6 @@ public:
             if (this != &other)
             {
                 _container = other._container;
-                _size = other._size;
             }
             return *this;
         }
@@ -76,13 +74,12 @@ public:
         // Dereference operator (operator*)
         int operator*() const
         {
-            return _container.element.at((size_t)_size);
+            return _container.element.at(1);
         }
 
         // Pre-increment operator (operator++)
         AscendingIterator operator++()
         {
-            _size++;
             return (*this);
         }
 
@@ -105,11 +102,10 @@ public:
     {
     private:
         MagicalContainer &_container;
-        int _size;
 
     public:
-        SideCrossIterator(MagicalContainer &container) : _container(container), _size(container.size()){};
-        SideCrossIterator(const SideCrossIterator &other) : _container(other._container), _size(other._size){}; // Copy constructor
+        SideCrossIterator(MagicalContainer &container) : _container(container){};
+        SideCrossIterator(const SideCrossIterator &other) : _container(other._container){}; // Copy constructor
         ~SideCrossIterator(){};
 
         SideCrossIterator(SideCrossIterator &&) = delete;            // Deleting move constructor
@@ -121,7 +117,6 @@ public:
             if (this != &other)
             {
                 _container = other._container;
-                _size = other._size;
             }
             return *this;
         }
@@ -155,7 +150,6 @@ public:
         // Pre-increment operator (operator++)
         SideCrossIterator operator++()
         {
-            _size++;
             return (*this);
         }
 
@@ -175,11 +169,10 @@ public:
     {
     private:
         MagicalContainer &_container;
-        int _size;
 
     public:
-        PrimeIterator(MagicalContainer &container) : _container(container), _size(container.size()){};
-        PrimeIterator(const PrimeIterator &other) : _container(other._container), _size(other._size){}; // Copy constructor
+        PrimeIterator(MagicalContainer &container) : _container(container){};
+        PrimeIterator(const PrimeIterator &other) : _container(other._container){}; // Copy constructor
         ~PrimeIterator(){};
 
         PrimeIterator(PrimeIterator &&) = delete; // Deleting move constructor
@@ -191,7 +184,6 @@ public:
             if (this != &other)
             {
                 _container = other._container;
-                _size = other._size;
             }
             return *this;
         }
@@ -222,7 +214,6 @@ public:
         // Pre-increment operator (operator++)
         PrimeIterator operator++()
         {
-            _size++;
             return (*this);
         }
 
