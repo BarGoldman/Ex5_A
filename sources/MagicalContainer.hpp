@@ -55,7 +55,7 @@ public:
 
         // Dereference operator (operator*)
         int operator*() const{
-            return 3;
+            return _container.element.at((size_t)_size);
         }
         
         // Pre-increment operator (operator++)          
@@ -69,9 +69,9 @@ public:
         }
 
         AscendingIterator end(){
-            AscendingIterator itt(_container);
-            itt._size = _container.size();
-            return itt;
+            AscendingIterator temp(_container);
+            temp._size = _container.size();
+            return temp;
         }
 
         ~AscendingIterator() = default;
