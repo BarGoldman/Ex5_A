@@ -17,10 +17,10 @@ public:
     MagicalContainer(){};
     ~MagicalContainer(){};
 
-    MagicalContainer(const MagicalContainer &) = delete;            // Deleting copy constructor
-    MagicalContainer &operator=(const MagicalContainer &) = delete; // Deleting copy assignment operator
-    MagicalContainer(MagicalContainer &&) = delete;                 // Deleting move constructor
-    MagicalContainer &operator=(MagicalContainer &&) = delete;      // Deleting move assignment operator
+    MagicalContainer(const MagicalContainer &) = delete;             // Deleting copy constructor
+    MagicalContainer &operator=(const MagicalContainer &) = default; // Deleting copy assignment operator
+    MagicalContainer(MagicalContainer &&) = delete;                  // Deleting move constructor
+    MagicalContainer &operator=(MagicalContainer &&) = delete;       // Deleting move assignment operator
 
     void addElement(int num);
 
@@ -37,16 +37,21 @@ public:
         int _size;
 
     public:
-        AscendingIterator(MagicalContainer &container) : _container(container), _size(container.size()){};                     // Default constructor
+        AscendingIterator(MagicalContainer &container) : _container(container), _size(container.size()){};      // Default constructor
         AscendingIterator(const AscendingIterator &other) : _container(other._container), _size(other._size){}; // Copy constructor
 
         AscendingIterator(AscendingIterator &&) = delete;            // Deleting move constructor
         AscendingIterator &operator=(AscendingIterator &&) = delete; // Deleting move assignment operator
 
         // Assignment operator
-        AscendingIterator &operator=(const AscendingIterator &)
+        AscendingIterator &operator=(const AscendingIterator &other)
         {
-            // TODO: Implement
+            if (this != &other)
+            {
+                _container = other._container;
+                _size = other._size;
+            }
+            return *this;
         }
 
         // Equality comparison (operator==)
@@ -107,11 +112,19 @@ public:
         SideCrossIterator(const SideCrossIterator &other) : _container(other._container), _size(other._size){}; // Copy constructor
         ~SideCrossIterator(){};
 
-        SideCrossIterator(SideCrossIterator &&) = delete; // Deleting move constructor
-        SideCrossIterator &operator=(SideCrossIterator &&) = delete;// Deleting move assignment operator
+        SideCrossIterator(SideCrossIterator &&) = delete;            // Deleting move constructor
+        SideCrossIterator &operator=(SideCrossIterator &&) = delete; // Deleting move assignment operator
 
         // Assignment operator
-        SideCrossIterator &operator=(const SideCrossIterator &)= default;
+        SideCrossIterator &operator=(const SideCrossIterator &other)
+        {
+            if (this != &other)
+            {
+                _container = other._container;
+                _size = other._size;
+            }
+            return *this;
+        }
 
         // Equality comparison (operator==)
         bool operator==(const SideCrossIterator &other) const
@@ -165,17 +178,23 @@ public:
         int _size;
 
     public:
-        PrimeIterator(MagicalContainer &container) : _container(container) , _size(container.size()){};
+        PrimeIterator(MagicalContainer &container) : _container(container), _size(container.size()){};
         PrimeIterator(const PrimeIterator &other) : _container(other._container), _size(other._size){}; // Copy constructor
         ~PrimeIterator(){};
 
         PrimeIterator(PrimeIterator &&) = delete; // Deleting move constructor
         PrimeIterator &operator=(PrimeIterator &&) = delete;
 
-
         // Assignment operator
-        PrimeIterator &operator=(const PrimeIterator &) = default;
-
+        PrimeIterator &operator=(const PrimeIterator &other)
+        {
+            if (this != &other)
+            {
+                _container = other._container;
+                _size = other._size;
+            }
+            return *this;
+        }
 
         // Equality comparison (operator==)
         bool operator==(const PrimeIterator &other) const
@@ -217,7 +236,6 @@ public:
             return PrimeIterator(_container);
         }
     };
-
 };
 
 #endif
