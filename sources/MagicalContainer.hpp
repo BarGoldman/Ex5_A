@@ -74,7 +74,7 @@ public:
         // Dereference operator (operator*)
         int operator*() const
         {
-            return _container.element.at(1);
+            return 3;
         }
 
         // Pre-increment operator (operator++)
