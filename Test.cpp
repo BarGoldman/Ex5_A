@@ -213,7 +213,7 @@ TEST_CASE("add elent after - After defining the iterator")
     
 }
 
-TEST_CASE("in SideCrossIterator - The size does not matter - the location does"){
+TEST_CASE("in SideCrossIterator - the location does not matter"){
     MagicalContainer container;
     CHECK_NOTHROW(container.addElement(20));
     CHECK_NOTHROW(container.addElement(50));
