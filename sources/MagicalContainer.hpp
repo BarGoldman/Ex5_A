@@ -11,16 +11,10 @@ namespace ariel
 class MagicalContainer
 {
 private:
-    vector<int> element;
+    vector<int> _element;
 
 public:
-    MagicalContainer(){};
-    ~MagicalContainer(){};
-
-    MagicalContainer(const MagicalContainer &) = delete;             // Deleting copy constructor
-    MagicalContainer &operator=(const MagicalContainer &) = default; // Deleting copy assignment operator
-    MagicalContainer(MagicalContainer &&) = delete;                  // Deleting move constructor
-    MagicalContainer &operator=(MagicalContainer &&) = delete;       // Deleting move assignment operator
+    MagicalContainer();
 
     void addElement(int num);
 
@@ -36,132 +30,64 @@ public:
         MagicalContainer &_container;
 
     public:
-        AscendingIterator(MagicalContainer &container) : _container(container){};      // Default constructor
-        AscendingIterator(const AscendingIterator &other) : _container(other._container){}; // Copy constructor
-
-        AscendingIterator(AscendingIterator &&) = delete;            // Deleting move constructor
-        AscendingIterator &operator=(AscendingIterator &&) = delete; // Deleting move assignment operator
+        AscendingIterator(MagicalContainer &container); // Default constructor
+        AscendingIterator(AscendingIterator &other);    // Copy constructor
 
         // Assignment operator
-        AscendingIterator &operator=(const AscendingIterator &other)
-        {
-            if (this != &other)
-            {
-                _container = other._container;
-            }
-            return *this;
-        }
+        AscendingIterator &operator=(const AscendingIterator &other);
 
         // Equality comparison (operator==)
-        bool operator==(const AscendingIterator &other) const
-        {
-            return true;
-        }
+        bool operator==(const AscendingIterator &other) const ;
+
         // Inequality comparison (operator!=)
-        bool operator!=(const AscendingIterator &other) const
-        {
-            return false;
-        }
-        bool operator>(const AscendingIterator &other) const
-        {
-            return true;
-        }
-        bool operator<(const AscendingIterator &other) const
-        {
-            return true;
-        }
+        bool operator!=(const AscendingIterator &other) const ;
+        bool operator>(const AscendingIterator &other) const ;
+        bool operator<(const AscendingIterator &other) const ;
 
         // Dereference operator (operator*)
-        int operator*() const
-        {
-            return 3;
-        }
+        int operator*() const ;
 
         // Pre-increment operator (operator++)
-        AscendingIterator operator++()
-        {
-            return (*this);
-        }
+        AscendingIterator &operator++() ;
 
-        AscendingIterator begin()
-        {
-            return AscendingIterator(_container);
-        }
+        MagicalContainer::AscendingIterator begin();
+        AscendingIterator end();
 
-        AscendingIterator end()
-        {
-            return AscendingIterator(_container);
-        }
-
-        ~AscendingIterator(){};
+        ~AscendingIterator();
     };
 
     ///////////////////////////////////////// SideCrossIterator ////////////////////////
 
-    class SideCrossIterator
+        class SideCrossIterator
     {
     private:
         MagicalContainer &_container;
 
     public:
-        SideCrossIterator(MagicalContainer &container) : _container(container){};
-        SideCrossIterator(const SideCrossIterator &other) : _container(other._container){}; // Copy constructor
-        ~SideCrossIterator(){};
-
-        SideCrossIterator(SideCrossIterator &&) = delete;            // Deleting move constructor
-        SideCrossIterator &operator=(SideCrossIterator &&) = delete; // Deleting move assignment operator
+        SideCrossIterator(MagicalContainer &container); // Default constructor
+        SideCrossIterator(SideCrossIterator &other);    // Copy constructor
 
         // Assignment operator
-        SideCrossIterator &operator=(const SideCrossIterator &other)
-        {
-            if (this != &other)
-            {
-                _container = other._container;
-            }
-            return *this;
-        }
+        SideCrossIterator &operator=(const SideCrossIterator &other);
 
         // Equality comparison (operator==)
-        bool operator==(const SideCrossIterator &other) const
-        {
-            return true;
-        }
+        bool operator==(const SideCrossIterator &other) const ;
 
         // Inequality comparison (operator!=)
-        bool operator!=(const SideCrossIterator &other) const
-        {
-            return false;
-        }
-        bool operator>(const SideCrossIterator &other) const
-        {
-            return true;
-        }
-        bool operator<(const SideCrossIterator &other) const
-        {
-            return true;
-        }
+        bool operator!=(const SideCrossIterator &other) const ;
+        bool operator>(const SideCrossIterator &other) const ;
+        bool operator<(const SideCrossIterator &other) const ;
 
         // Dereference operator (operator*)
-        int operator*() const
-        {
-            return 2;
-        }
+        int operator*() const ;
 
         // Pre-increment operator (operator++)
-        SideCrossIterator operator++()
-        {
-            return (*this);
-        }
+        SideCrossIterator &operator++() ;
 
-        SideCrossIterator begin()
-        {
-            return SideCrossIterator(_container);
-        }
+        MagicalContainer::SideCrossIterator begin();
+        SideCrossIterator end();
 
-        SideCrossIterator end()
-        {
-            return SideCrossIterator(_container);
-        }
+        ~SideCrossIterator();
     };
 
     ///////////////////////////////////////// PrimeIterator ////////////////////////
@@ -171,61 +97,30 @@ public:
         MagicalContainer &_container;
 
     public:
-        PrimeIterator(MagicalContainer &container) : _container(container){};
-        PrimeIterator(const PrimeIterator &other) : _container(other._container){}; // Copy constructor
-        ~PrimeIterator(){};
-
-        PrimeIterator(PrimeIterator &&) = delete; // Deleting move constructor
-        PrimeIterator &operator=(PrimeIterator &&) = delete;
+        PrimeIterator(MagicalContainer &container); // Default constructor
+        PrimeIterator(PrimeIterator &other);    // Copy constructor
 
         // Assignment operator
-        PrimeIterator &operator=(const PrimeIterator &other)
-        {
-            if (this != &other)
-            {
-                _container = other._container;
-            }
-            return *this;
-        }
+        PrimeIterator &operator=(const PrimeIterator &other);
 
         // Equality comparison (operator==)
-        bool operator==(const PrimeIterator &other) const
-        {
-            return true;
-        }
+        bool operator==(const PrimeIterator &other) const ;
+
         // Inequality comparison (operator!=)
-        bool operator!=(const PrimeIterator &other) const
-        {
-            return false;
-        }
-        bool operator>(const PrimeIterator &other) const
-        {
-            return true;
-        }
-        bool operator<(const PrimeIterator &other) const
-        {
-            return true;
-        }
+        bool operator!=(const PrimeIterator &other) const ;
+        bool operator>(const PrimeIterator &other) const ;
+        bool operator<(const PrimeIterator &other) const ;
+
         // Dereference operator (operator*)
-        int operator*() const
-        {
-            return 1;
-        }
+        int operator*() const ;
+
         // Pre-increment operator (operator++)
-        PrimeIterator operator++()
-        {
-            return (*this);
-        }
+        PrimeIterator &operator++() ;
 
-        PrimeIterator begin()
-        {
-            return PrimeIterator(_container);
-        }
+        MagicalContainer::PrimeIterator begin();
+        PrimeIterator end();
 
-        PrimeIterator end()
-        {
-            return PrimeIterator(_container);
-        }
+        ~PrimeIterator();
     };
 };
 

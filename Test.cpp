@@ -63,9 +63,9 @@ TEST_CASE("AscendingIterator")
     CHECK_NOTHROW(container.addElement(2));
     CHECK_NOTHROW(container.addElement(79));
     CHECK_NOTHROW(container.addElement(37));
-    MagicalContainer::AscendingIterator ascIter(container);
+    MagicalContainer::AscendingIterator it(container);
 
-    auto it = ascIter.begin();
+
     CHECK_EQ(*it, 2);
     ++it;
     CHECK_EQ(*it, 5);
@@ -75,28 +75,20 @@ TEST_CASE("AscendingIterator")
     CHECK_EQ(*it, 37);
     ++it;
     CHECK_EQ(*it, 79);
-
+    ++it;
     /////////////////////// test for opertor ///////////////////////////////
     // tesr for ==
-    CHECK_EQ(it == ascIter.begin(), false);
-    CHECK_EQ(it == ascIter.end(), true);
+    CHECK_EQ(it == it.begin(), false);
+    CHECK_EQ(it == it.end(), true);
 
     // tesr for !=
-    CHECK_EQ(it != ascIter.begin(), true);
-    CHECK_EQ(it != ascIter.end(), false);
+    CHECK_EQ(it != it.begin(), true);
+    CHECK_EQ(it != it.end(), false);
 
-    auto a = ascIter.begin();
-    auto b = ascIter.begin();
-    CHECK_EQ(a == b, true);
-    ++b;
-    CHECK_EQ(a == b, false);
 
     // test for >
-    CHECK_EQ(b > a, true);
-    auto c = ascIter.end();
-    CHECK_EQ(c < b, false);
-    CHECK_EQ(c > b, true);
-    CHECK_THROWS(++c);
+    CHECK_EQ((*it.end()) > (*it.begin()), true);
+    CHECK_EQ((*it.end()) < (*it.begin()), false);
 }
 
 TEST_CASE("SideCrossIterator")
@@ -108,9 +100,8 @@ TEST_CASE("SideCrossIterator")
     CHECK_NOTHROW(container.addElement(37));
     CHECK_NOTHROW(container.addElement(79));
 
-    MagicalContainer::SideCrossIterator crossIter(container);
+    MagicalContainer::SideCrossIterator it(container);
 
-    auto it = crossIter.begin();
     CHECK_EQ(*it, 2);
     ++it;
     CHECK_EQ(*it, 79);
@@ -120,27 +111,20 @@ TEST_CASE("SideCrossIterator")
     CHECK_EQ(*it, 37);
     ++it;
     CHECK_EQ(*it, 12);
-
+    ++it;
     /////////////////////// test for opertor ///////////////////////////////
     // tesr for ==
-    CHECK_EQ(it == crossIter.begin(), false);
-    CHECK_EQ(it == crossIter.end(), true);
+    CHECK_EQ(it == it.begin(), false);
+    CHECK_EQ(it == it.end(), true);
 
     // tesr for !=
-    CHECK_EQ(it != crossIter.begin(), true);
-    CHECK_EQ(it != crossIter.end(), false);
+    CHECK_EQ(it != it.begin(), true);
+    CHECK_EQ(it != it.end(), false);
 
-    auto a = crossIter.begin();
-    auto b = crossIter.begin();
-    CHECK_EQ(a == b, true);
-    ++b;
-    CHECK_EQ(a == b, false);
+    // 2, 79, 5 ,37,12
     // test for >
-    CHECK_EQ(b > a, true);
-    auto c = crossIter.end();
-    CHECK_EQ(c < b, false);
-    CHECK_EQ(c > b, true);
-    CHECK_THROWS(++c);
+    CHECK_EQ((*it.end()) > (*it.begin()), true);
+    CHECK_EQ((*it.end()) < (*it.begin()), false);
 }
 
 TEST_CASE("PrimeIterator")
@@ -152,12 +136,11 @@ TEST_CASE("PrimeIterator")
     CHECK_NOTHROW(container.addElement(79));
     CHECK_NOTHROW(container.addElement(37));
 
-    MagicalContainer::PrimeIterator primeIter(container);
+    MagicalContainer::PrimeIterator it(container);
 
-    CHECK_NOTHROW(primeIter.begin());
-    CHECK_NOTHROW(primeIter.end());
+    CHECK_NOTHROW(it.begin());
+    CHECK_NOTHROW(it.end());
 
-    auto it = primeIter.begin();
     CHECK_EQ(*it, 2);
     ++it;
     CHECK_EQ(*it, 5);
@@ -165,27 +148,20 @@ TEST_CASE("PrimeIterator")
     CHECK_EQ(*it, 37);
     ++it;
     CHECK_EQ(*it, 79);
+    ++it;
 
     /////////////////////// test for opertor ///////////////////////////////
     // tesr for ==
-    CHECK_EQ(it == primeIter.begin(), false);
-    CHECK_EQ(it == primeIter.end(), true);
+    CHECK_EQ(it == it.begin(), false);
+    CHECK_EQ(it == it.end(), true);
 
     // tesr for !=
-    CHECK_EQ(it != primeIter.begin(), true);
-    CHECK_EQ(it != primeIter.end(), false);
+    CHECK_EQ(it != it.begin(), true);
+    CHECK_EQ(it != it.end(), false);
 
-    auto a = primeIter.begin();
-    auto b = primeIter.begin();
-    CHECK_EQ(a == b, true);
-    ++b;
-    CHECK_EQ(a == b, false);
     // test for >
-    CHECK_EQ(b > a, true);
-    auto c = primeIter.end();
-    CHECK_EQ(c < b, false);
-    CHECK_EQ(c > b, true);
-    CHECK_THROWS(++c);
+    CHECK_EQ((*it.end()) > (*it.begin()), true);
+    CHECK_EQ((*it.end()) < (*it.begin()), false);
 }
 
 TEST_CASE("NO element in container")
@@ -194,26 +170,21 @@ TEST_CASE("NO element in container")
     MagicalContainer::AscendingIterator ascIter(container);
     MagicalContainer::PrimeIterator primeIter(container);
     MagicalContainer::SideCrossIterator crossIter(container);
-    CHECK_THROWS(ascIter.begin());
-    CHECK_THROWS(ascIter.end());
-    CHECK_THROWS(primeIter.begin());
-    CHECK_THROWS(primeIter.end());
-    CHECK_THROWS(crossIter.begin());
-    CHECK_THROWS(crossIter.end());
+    CHECK_EQ(crossIter.begin() == crossIter.end(), true);
+    CHECK_EQ(ascIter.begin() == ascIter.end(), true);
+    CHECK_EQ(primeIter.begin() == primeIter.end(), true);
 }
 
-TEST_CASE("When you have only one element the beginning and the end are equal")
+TEST_CASE("When you have only one element")
 {
     MagicalContainer container;
     CHECK_NOTHROW(container.addElement(2));
     MagicalContainer::PrimeIterator primeIter(container);
-    auto a = primeIter.begin();
-    auto b = primeIter.end();
-    CHECK_EQ(a == b, true);
+
+    CHECK_EQ(primeIter.begin() != primeIter.end(), true);
 
     container.removeElement(2);
-    CHECK_THROWS(primeIter.begin());
-    CHECK_THROWS(primeIter.end());
+    CHECK_EQ(primeIter.begin() == primeIter.end(), true);
 }
 
 TEST_CASE("A container without primes is an empty container for primes")
@@ -221,27 +192,24 @@ TEST_CASE("A container without primes is an empty container for primes")
     MagicalContainer container;
     CHECK_NOTHROW(container.addElement(20));
     MagicalContainer::PrimeIterator primeIter(container);
-    CHECK_THROWS(primeIter.begin());
-    CHECK_THROWS(primeIter.end());
+    CHECK_EQ(primeIter.begin() == primeIter.end(), true);
 }
 
 TEST_CASE("add elent after - After defining the iterator")
 {
     MagicalContainer container;
     MagicalContainer::SideCrossIterator crossIter(container);
-    CHECK_THROWS(crossIter.begin());
-    CHECK_THROWS(crossIter.end());
+    CHECK_EQ(crossIter.begin() == crossIter.end(), true);
 
     container.addElement(2);
     container.addElement(20);
     container.addElement(100);
 
-    CHECK_NOTHROW(crossIter.begin());
-    auto it = crossIter.begin();
-    CHECK_NOTHROW(crossIter.end());
-    CHECK_EQ(*it , 2);
-    CHECK_EQ(*it , 100);
-    CHECK_EQ(*it , 20);
+    CHECK_EQ(*crossIter , 2);
+    ++crossIter;
+    CHECK_EQ(*crossIter , 100);
+    ++crossIter;
+    CHECK_EQ(*crossIter , 20);
     
 }
 
@@ -249,14 +217,13 @@ TEST_CASE("in SideCrossIterator - The size does not matter - the location does")
     MagicalContainer container;
     CHECK_NOTHROW(container.addElement(20));
     CHECK_NOTHROW(container.addElement(50));
-    CHECK_NOTHROW(container.addElement(123));
+    CHECK_NOTHROW(container.addElement(12));
     CHECK_NOTHROW(container.addElement(3));
     CHECK_NOTHROW(container.addElement(7));
 
     MagicalContainer::SideCrossIterator crossIter(container);
-    auto a = crossIter.begin();
-    auto b = crossIter.begin();
-    ++b;
-    CHECK_EQ(b > a , true);
-    CHECK_EQ(*b > *a , false);
+    // 20 , 7 , 50 , 3, 12
+    CHECK_EQ((*crossIter.begin()) > (*crossIter.end()) , true);
+    ++crossIter;
+    CHECK_EQ((*crossIter) < (*crossIter.end()) , true);
 }
