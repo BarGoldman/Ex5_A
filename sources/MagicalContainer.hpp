@@ -31,10 +31,8 @@ public:
 
     public:
         AscendingIterator(MagicalContainer &container); // Default constructor
-        AscendingIterator(AscendingIterator &other);    // Copy constructor
 
         // Assignment operator
-        AscendingIterator &operator=(const AscendingIterator &other);
 
         // Equality comparison (operator==)
         bool operator==(const AscendingIterator &other) const ;
@@ -50,10 +48,9 @@ public:
         // Pre-increment operator (operator++)
         AscendingIterator &operator++() ;
 
-        MagicalContainer::AscendingIterator begin();
+        AscendingIterator begin();
         AscendingIterator end();
 
-        ~AscendingIterator();
     };
 
     ///////////////////////////////////////// SideCrossIterator ////////////////////////
@@ -65,10 +62,6 @@ public:
 
     public:
         SideCrossIterator(MagicalContainer &container); // Default constructor
-        SideCrossIterator(SideCrossIterator &other);    // Copy constructor
-
-        // Assignment operator
-        SideCrossIterator &operator=(const SideCrossIterator &other);
 
         // Equality comparison (operator==)
         bool operator==(const SideCrossIterator &other) const ;
@@ -87,7 +80,6 @@ public:
         MagicalContainer::SideCrossIterator begin();
         SideCrossIterator end();
 
-        ~SideCrossIterator();
     };
 
     ///////////////////////////////////////// PrimeIterator ////////////////////////
@@ -98,10 +90,7 @@ public:
 
     public:
         PrimeIterator(MagicalContainer &container); // Default constructor
-        PrimeIterator(PrimeIterator &other);    // Copy constructor
 
-        // Assignment operator
-        PrimeIterator &operator=(const PrimeIterator &other);
 
         // Equality comparison (operator==)
         bool operator==(const PrimeIterator &other) const ;
@@ -119,8 +108,6 @@ public:
 
         MagicalContainer::PrimeIterator begin();
         PrimeIterator end();
-
-        ~PrimeIterator();
     };
 };
 

@@ -12,15 +12,6 @@ void MagicalContainer::removeElement(int num) {}
 ///////////////////////////////////////// AscendingIterator ////////////////////////
 
 MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer &container) : _container(container) {}
-MagicalContainer::AscendingIterator::AscendingIterator(AscendingIterator &other) : _container(other._container) {}
-MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(const AscendingIterator &other)
-{
-    if (this != &other)
-    {
-        _container = other._container;
-    }
-    return *this;
-}
 
 // Equality comparison (operator==)
 bool MagicalContainer::AscendingIterator::operator==(const AscendingIterator &other) const
@@ -63,20 +54,11 @@ MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::end()
     return AscendingIterator(_container);
 }
 
-MagicalContainer::AscendingIterator::~AscendingIterator(){};
 
 ///////////////////////////////////////// SideCrossIterator ////////////////////////
 
 MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer &container) : _container(container) {}
-MagicalContainer::SideCrossIterator::SideCrossIterator(SideCrossIterator &other) : _container(other._container) {}
-MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator=(const SideCrossIterator &other)
-{
-    if (this != &other)
-    {
-        _container = other._container;
-    }
-    return *this;
-}
+
 
 // Equality comparison (operator==)
 bool MagicalContainer::SideCrossIterator::operator==(const SideCrossIterator &other) const
@@ -119,20 +101,10 @@ MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::end()
     return SideCrossIterator(_container);
 }
 
-MagicalContainer::SideCrossIterator::~SideCrossIterator(){};
 
 ///////////////////////////////////////// PrimeIterator ////////////////////////
 
 MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer &container) : _container(container) {}
-MagicalContainer::PrimeIterator::PrimeIterator(PrimeIterator &other) : _container(other._container) {}
-MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator=(const PrimeIterator &other)
-{
-    if (this != &other)
-    {
-        _container = other._container;
-    }
-    return *this;
-}
 
 // Equality comparison (operator==)
 bool MagicalContainer::PrimeIterator::operator==(const PrimeIterator &other) const
@@ -175,4 +147,3 @@ MagicalContainer::PrimeIterator MagicalContainer::PrimeIterator::end()
     return PrimeIterator(_container);
 }
 
-MagicalContainer::PrimeIterator::~PrimeIterator(){};
